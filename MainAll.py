@@ -528,7 +528,7 @@ def classifyPose(landmarks, output_image, display=False):
     elif left_shoulder_angle <=90:
         L_upper_arm_score=3
 
-    cv2.putText(output_image, "L_upper_arm_score : " + str("{:0.2f}".format(L_upper_arm_score)), (500, text_posx),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)    
+    cv2.putText(output_image, "L_upper_arm_score : " + str("{:0.2f}".format(L_upper_arm_score)), (500, text_posx),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)    
     
     
     # Right upper arm
@@ -547,7 +547,7 @@ def classifyPose(landmarks, output_image, display=False):
     elif right_shoulder_angle <=90:
         R_upper_arm_score=3
     
-    cv2.putText(output_image, "R_upper_arm_score : " + str("{:0.2f}".format(R_upper_arm_score)), (500, text_posx+text_step*1),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    cv2.putText(output_image, "R_upper_arm_score : " + str("{:0.2f}".format(R_upper_arm_score)), (500, text_posx+text_step*1),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
     
     # Left_Lower_arm เสร็จ
     #cv2.putText(output_image, "L_elbow_angle : " + str("{:0.2f}".format(left_elbow_angle)), (10, text_posx+text_step*2),cv2.FONT_HERSHEY_PLAIN, 1.3, (0,0,255), 2)
@@ -561,7 +561,7 @@ def classifyPose(landmarks, output_image, display=False):
     elif left_elbow_angle >=280:
         L_lower_arm_score=2
         
-    cv2.putText(output_image, "L_lower_arm_score : " + str("{:0.2f}".format(L_lower_arm_score)), (500, text_posx+text_step*2),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    cv2.putText(output_image, "L_lower_arm_score : " + str("{:0.2f}".format(L_lower_arm_score)), (500, text_posx+text_step*2),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
 
     # Right_Lower_arm เสร็จ
    # cv2.putText(output_image, "R_elbow_angle : " + str("{:0.2f}".format(right_elbow_angle)), (10, text_posx+text_step*3),cv2.FONT_HERSHEY_PLAIN, 1.3, (0,0,255), 2)
@@ -574,7 +574,7 @@ def classifyPose(landmarks, output_image, display=False):
         
     elif right_elbow_angle>=280:
         R_lower_arm_score=2
-    cv2.putText(output_image, "R_lower_arm_score : " + str("{:0.2f}".format(R_lower_arm_score)), (500, text_posx+text_step*3),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2) 
+    cv2.putText(output_image, "R_lower_arm_score : " + str("{:0.2f}".format(R_lower_arm_score)), (500, text_posx+text_step*3),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2) 
     
     
     
@@ -595,7 +595,7 @@ def classifyPose(landmarks, output_image, display=False):
         L_wrist_range_score=2
     elif 0 < left_wrist_range_angle < 100:
         L_wrist_range_score=3
-    cv2.putText(output_image, "L_wristrange_score : " + str("{:0.2f}".format(L_wrist_range_score)), (500, text_posx+text_step*4),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    cv2.putText(output_image, "L_wristrange_score : " + str("{:0.2f}".format(L_wrist_range_score)), (500, text_posx+text_step*4),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
 
 
 
@@ -615,7 +615,7 @@ def classifyPose(landmarks, output_image, display=False):
         R_wrist_range_score=2
     elif 280 < right_wrist_range_angle < 360:
         R_wrist_range_score=3
-    cv2.putText(output_image, "R_wristrange_score : " + str("{:0.2f}".format(R_wrist_range_score)), (500, text_posx+text_step*5),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    cv2.putText(output_image, "R_wristrange_score : " + str("{:0.2f}".format(R_wrist_range_score)), (500, text_posx+text_step*5),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
     
     
     #Left_wrist_twist
@@ -626,7 +626,7 @@ def classifyPose(landmarks, output_image, display=False):
         
     elif 100<= left_wrist_angle <360:
         L_wrist_twist_score=1  
-    cv2.putText(output_image, "L_wrist_twist_score : " + str("{:0.2f}".format(L_wrist_twist_score)), (500, text_posx+text_step*6),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2) 
+    cv2.putText(output_image, "L_wrist_twist_score : " + str("{:0.2f}".format(L_wrist_twist_score)), (500, text_posx+text_step*6),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2) 
    
     #Right_wrist_twist
    # cv2.putText(output_image, "R_wrist_angle : " + str("{:0.2f}".format(right_wrist_angle)), (10, text_posx+text_step*7),cv2.FONT_HERSHEY_PLAIN, 1.3, (0,0,255), 2)
@@ -635,23 +635,23 @@ def classifyPose(landmarks, output_image, display=False):
         
     elif 100<= right_wrist_angle <360:
         R_wrist_twist_score=2  
-    cv2.putText(output_image, "R_wrist_twist_score : " + str("{:0.2f}".format(R_wrist_twist_score)), (500, text_posx+text_step*7),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2) 
+    cv2.putText(output_image, "R_wrist_twist_score : " + str("{:0.2f}".format(R_wrist_twist_score)), (500, text_posx+text_step*7),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2) 
  #---------------------------------------------------------------------------------------------------------------------
     #FOR LEFT TABLE A
     LA = str(find_rula(L_upper_arm_score,L_lower_arm_score,L_wrist_range_score,L_wrist_twist_score,'TABLE_A.xlsx'))
-    cv2.putText(output_image,"Left Table A : " + LA, (10, text_posx),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    cv2.putText(output_image,"Left Table A : " + LA, (10, text_posx),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
     #print(find_rula(L_upper_arm_score,L_upper_arm_score,L_wrist_range_score,L_wrist_twist_score))
 
     
 
     #FOR RIGHT TABLE A
     RA = str(find_rula(R_upper_arm_score,R_lower_arm_score,R_wrist_range_score,R_wrist_twist_score,'TABLE_A.xlsx'))
-    cv2.putText(output_image,"Right Table A : " + RA, (10, text_posx+text_step*1),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    cv2.putText(output_image,"Right Table A : " + RA, (10, text_posx+text_step*1),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
     # print(find_rula(R_upper_arm_score,L_lower_arm_score,L_wrist_range_score,L_wrist_twist_score))
 
     #Foe Table B
     #LB = str(find_rula(Neck_score,Trunk_score,left_knee_score,'TABLE_B.xlsx'))
-    #cv2.putText(output_image,"Table B : " + LB, (10, text_posx+text_step*2),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    #cv2.putText(output_image,"Table B : " + LB, (10, text_posx+text_step*2),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
 
 
     
@@ -674,12 +674,12 @@ def classifyPose(landmarks, output_image, display=False):
         
     LB = str(find_rula(1, Neck_score, Trunk_score, left_knee_score, 'TABLE_B.xlsx'))
     RB = LB
-    cv2.putText(output_image,"Left&Right Table B : " + LB, (10, text_posx+text_step*2),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    cv2.putText(output_image,"Left&Right Table B : " + LB, (10, text_posx+text_step*2),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
 
     LC = str(find_rula(1, LA, 1, LB, 'TABLE_C.xlsx'))
-    cv2.putText(output_image,"Left Table C : " + LC, (10, text_posx+text_step*3),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    cv2.putText(output_image,"Left Table C : " + LC, (10, text_posx+text_step*3),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
     RC = str(find_rula(1, RA, 1, RB, 'TABLE_C.xlsx'))
-    cv2.putText(output_image,"Right Table C : " + RC, (10, text_posx+text_step*4),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    cv2.putText(output_image,"Right Table C : " + RC, (10, text_posx+text_step*4),cv2.FONT_HERSHEY_PLAIN, 1.3, (127, 20, 0), 2)
 
 
     # print(left_knee_score)

@@ -4,7 +4,7 @@ import numpy as np
 import time
 import mediapipe as mp
 import matplotlib.pyplot as plt
-from MainAllcopy import *
+from MainAllcopyWeight import *
 import time
 
 # Setup Pose function for video.

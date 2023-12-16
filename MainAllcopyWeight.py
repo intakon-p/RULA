@@ -8,8 +8,8 @@ import pandas as pd
 from openpyxl import load_workbook
 
 
-
-Weight = input("What is weight of object in KG ?")
+Weight = 0
+#Weight = input("What is weight of object in KG ?")
 # Time
 time_ = 0
 
@@ -420,13 +420,28 @@ def classifyPose(landmarks, output_image, display=False):
 
      
     #HAND+POSE
-    left_wrist_range_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value],
-                                      landmarks[mp_pose.HandLandmark.WRIST.value+LEFT_HAND],
-                                      landmarks[mp_pose.PoseLandmark.LEFT_INDEX.value+LEFT_HAND])
-    
-    right_wrist_range_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value],
-                                      landmarks[mp_pose.HandLandmark.WRIST.value+RIGHT_HAND],
-                                      landmarks[mp_pose.PoseLandmark.RIGHT_INDEX.value+RIGHT_HAND])  
+    # left_wrist_range_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value],
+    #                                   landmarks[mp_pose.HandLandmark.WRIST.value+LEFT_HAND],
+    #                                   landmarks[mp_pose.PoseLandmark.LEFT_INDEX.value+LEFT_HAND])
+    left_wrist_range_angle = ((calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_INDEX.value])  +calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_PINKY.value])  +calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value],
+                                     landmarks[mp_pose.PoseLandmark.RIGHT_THUMB.value]))  /  3   )   -   190
+
+    right_wrist_range_angle = ((calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value],
+                                     landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value],
+                                     landmarks[mp_pose.PoseLandmark.LEFT_INDEX.value])  +calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value],
+                                     landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value],
+                                     landmarks[mp_pose.PoseLandmark.LEFT_PINKY.value])  +calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value],
+                                     landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value],
+                                     landmarks[mp_pose.PoseLandmark.LEFT_THUMB.value]))  /  3  )   -   175
+
+    # right_wrist_range_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value],
+    #                                 landmarks[mp_pose.HandLandmark.WRIST.value],
+    #                                 landmarks[mp_pose.HandLandmark.MIDDLE_FINGER_MCP.value])  
     
     
     # Get the angle between the wrist, thumb_tip and pinky_tip
@@ -587,41 +602,25 @@ def classifyPose(landmarks, output_image, display=False):
     
    # Left_wrist_Range
     #cv2.putText(output_image, "L_Wrist_Range_Angle : " + str("{:0.2f}".format(left_wrist_range_angle)), (10, text_posx+text_step*4),cv2.FONT_HERSHEY_PLAIN, 1.3, (0,0,255), 2)
-    L_wrist_range_score = 1 
-    if  290 < left_wrist_range_angle < 320:
+    L_wrist_range_score = 2 
+    if  -15 <= left_wrist_range_angle <= 15:
+        L_wrist_range_score = 2 
+    elif -15 > left_wrist_range_angle or left_wrist_range_angle > 15:
+        L_wrist_range_score = 3
+    cv2.putText(output_image, "L_wrist_range_score : " + str("{:0.2f}".format(L_wrist_range_score)) + ", " + str("{:0.2f}".format(left_wrist_range_angle)), (450, text_posx+text_step*4),cv2.FONT_HERSHEY_PLAIN, 1.3, (0,0,0), 5)
+    cv2.putText(output_image, "L_wrist_range_score : " + str("{:0.2f}".format(L_wrist_range_score)) + ", " + str("{:0.2f}".format(left_wrist_range_angle)), (450, text_posx+text_step*4),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
     
-        L_wrist_range_score = 1 
-    
-    elif 260 <= left_wrist_range_angle < 290:
-        L_wrist_range_score=2
-    elif 200 <= left_wrist_range_angle < 260:
-        L_wrist_range_score=3
-
-    elif 320 <=left_wrist_range_angle < 360:
-        L_wrist_range_score=2
-    elif 0 < left_wrist_range_angle < 100:
-        L_wrist_range_score=3
-    cv2.putText(output_image, "L_wristrange_score : " + str("{:0.2f}".format(L_wrist_range_score)), (500, text_posx+text_step*4),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
-
 
 
     # Right_wrist_Range
     #cv2.putText(output_image, "R_Wrist_Range_Angle : " + str("{:0.2f}".format(right_wrist_range_angle)), (10, text_posx+text_step*5),cv2.FONT_HERSHEY_PLAIN, 1.3, (0,0,255), 2)
-    R_wrist_range_score = 1
-    if  30 < right_wrist_range_angle < 60:
-        
-        R_wrist_range_score=1
-    
-    elif 60 <= right_wrist_range_angle < 90:
-        R_wrist_range_score=2
-    elif 90 <= right_wrist_range_angle < 180:
-        R_wrist_range_score=3
-
-    elif 0 <right_wrist_range_angle < 30:
-        R_wrist_range_score=2
-    elif 280 < right_wrist_range_angle < 360:
-        R_wrist_range_score=3
-    cv2.putText(output_image, "R_wristrange_score : " + str("{:0.2f}".format(R_wrist_range_score)), (500, text_posx+text_step*5),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
+    R_wrist_range_score = 2 
+    if  -15 <= right_wrist_range_angle <= 15:
+        R_wrist_range_score = 2 
+    elif -15 > right_wrist_range_angle or right_wrist_range_angle > 15:
+        R_wrist_range_score = 3
+    cv2.putText(output_image, "R_wrist_range_score : " + str("{:0.2f}".format(R_wrist_range_score)) + ", " + str("{:0.2f}".format(right_wrist_range_angle)) + "D", (450, text_posx+text_step*5),cv2.FONT_HERSHEY_PLAIN, 1.3, (0,0,0), 5)
+    cv2.putText(output_image, "R_wrist_range_score : " + str("{:0.2f}".format(R_wrist_range_score)) + ", " + str("{:0.2f}".format(right_wrist_range_angle)) + "D", (450, text_posx+text_step*5),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
     
     
     #Left_wrist_twist
@@ -682,6 +681,7 @@ def classifyPose(landmarks, output_image, display=False):
     RB = LB
     cv2.putText(output_image,"Left&Right Table B : " + LB, (10, text_posx+text_step*2),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
     
+
     Calweight = 0
     if Weight < 1.99 :
         Calweight = 0
@@ -691,10 +691,10 @@ def classifyPose(landmarks, output_image, display=False):
 #         Calweight = 2 
     elif Weight > 9.97:
         Calweight = 3
-    CLA = Calweight + LA 
-    CRA = Calweight + RA
-    CLB = Calweight + LB 
-    CRB = Calweight + RB
+    CLA = Calweight + int(LA) 
+    CRA = Calweight + int(RA)
+    CLB = Calweight + int(LB)
+    CRB = Calweight + int(RB)
 
     LC = str(find_rula(1, CLA, 1, CLB, 'TABLE_C.xlsx'))
     cv2.putText(output_image,"Left Table C : " + LC, (10, text_posx+text_step*3),cv2.FONT_HERSHEY_PLAIN, 1.3, (255,255,255), 2)
